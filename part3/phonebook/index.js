@@ -4,7 +4,7 @@
  * @Email: lijiaxia@3ncto.com
  * @FilePath: /fullstack-open-practice-backend/part3/phonebook/index.js
  * @LastEditors: lijiaxia
- * @LastEditTime: 2023-11-14 17:28:45
+ * @LastEditTime: 2023-11-14 21:41:34
  */
 const express = require("express");
 const morgan = require("morgan");
@@ -13,9 +13,14 @@ morgan.token("params", function (req, res) {
     return JSON.stringify(req.body);
 });
 
+
+morgan.format('log',
+    ":method :url :status :res[content-length] - :response-time ms :params "
+)
+
 app.use(
     morgan(
-        ":method :url :status :res[content-length] - :response-time ms :params"
+        'log'
     )
 );
 app.use(express.json());
